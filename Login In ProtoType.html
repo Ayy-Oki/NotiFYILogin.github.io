@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotiFYI - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0077be 0%, #00a8cc 25%, #0096c7 50%, #0077b6 75%, #023e8a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-container,
+        .signup-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 25px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            border-radius: 18px;
+            margin: 0 auto 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3);
+        }
+        
+        .notebook-icon {
+            width: 30px;
+            height: 38px;
+            background: white;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .notebook-icon::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 6px;
+            right: 6px;
+            height: 2px;
+            background: #4A90E2;
+            border-radius: 1px;
+        }
+        
+        .notebook-icon::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: 6px;
+            right: 6px;
+            height: 1px;
+            background: #ccc;
+            border-radius: 0.5px;
+            box-shadow: 0 6px 0 #ccc, 0 12px 0 #ccc;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            opacity: 0.7;
+        }
+        
+        .cloud::before,
+        .cloud::after {
+            content: "";
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .cloud-1 {
+            width: 20px;
+            height: 10px;
+            top: 15px;
+            left: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .cloud-1::before {
+            width: 12px;
+            height: 12px;
+            top: -6px;
+            left: 2px;
+        }
+        
+        .cloud-1::after {
+            width: 8px;
+            height: 8px;
+            top: -4px;
+            right: 2px;
+        }
+        
+        .cloud-2 {
+            width: 16px;
+            height: 8px;
+            bottom: 20px;
+            right: 12px;
+            animation: float 4s ease-in-out infinite reverse;
+        }
+        
+        .cloud-2::before {
+            width: 10px;
+            height: 10px;
+            top: -5px;
+            left: 1px;
+        }
+        
+        .cloud-2::after {
+            width: 6px;
+            height: 6px;
+            top: -3px;
+            right: 1px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        .app-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+        
+        .app-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #4A90E2;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #adb5bd;
+        }
+        
+        .help-tooltip {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .help-tooltip::before {
+            content: "💡";
+            font-size: 16px;
+        }
+        
+        .login-button {
+            width: 100%;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #adb5bd;
+            font-size: 13px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e1e5e9;
+        }
+        
+        .divider span {
+            padding: 0 20px;
+        }
+        
+        .secondary-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .link-button {
+            color: #4A90E2;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .link-button:hover {
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        .signup-button {
+            background: transparent;
+            border: 2px solid #4A90E2;
+            color: #4A90E2;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-button:hover {
+            background: #4A90E2;
+            color: white;
+        }
+        
+        .embedded-help {
+            background: #e8f4fd;
+            border: 1px solid #4A90E2;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .help-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4A90E2;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .help-content {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+        }
+        
+        .help-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0 0;
+        }
+        
+        .help-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .help-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4A90E2;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container,
+            .signup-container {
+                padding: 20px 15px;
+                margin: 5px;
+                max-width: 340px;
+            }
+            
+            .app-title {
+                font-size: 24px;
+            }
+            
+            .form-input,
+            .login-button {
+                padding: 12px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .embedded-help {
+                padding: 12px;
+            }
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .toggle-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .signup-container {
+            display: none;
+        }
+        
+        .signup-container.active {
+            display: block;
+        }
+        
+        .login-container.hidden {
+            display: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 12px;
+        }
+        
+        .strength-meter {
+            margin-top: 8px;
+            height: 4px;
+            background: #e1e5e9;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .strength-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .strength-weak { width: 25%; background: #dc3545; }
+        .strength-fair { width: 50%; background: #ffc107; }
+        .strength-good { width: 75%; background: #17a2b8; }
+        .strength-strong { width: 100%; background: #28a745; }
+        
+        .strength-text {
+            font-size: 12px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .checkbox-input {
+            margin-top: 2px;
+        }
+        
+        .checkbox-label {
+            font-size: 13px;
+            line-height: 1.4;
+            color: #555;
+        }
+        
+        .checkbox-label a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+        
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #fff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <!-- App Icon with Notebook & Clouds -->
+        <div class="app-icon">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="notebook-icon"></div>
+        </div>
+        
+        <!-- App Branding -->
+        <h1 class="app-title">NotiFYI</h1>
+        <p class="app-subtitle">Your Smart Planning Companion</p>
+        
+        <!-- Login Form -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    class="form-input" 
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <div class="password-toggle">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <button type="button" class="toggle-btn" onclick="togglePassword()">Show</button>
+                </div>
+            </div>
+            
+            <!-- Embedded Help Tooltip -->
+            <div class="help-tooltip">
+                First time here? Your account automatically syncs across all your devices once you sign up!
+            </div>
+            
+            <button type="submit" class="login-button" id="loginBtn">
+                Sign In to NotiFYI
+            </button>
+        </form>
+        
+        <!-- Divider -->
+        <div class="divider">
+            <span>or</span>
+        </div>
+        
+        <!-- Secondary Actions -->
+        <div class="secondary-actions">
+            <button class="signup-button" onclick="showSignupForm()">
+                Create New Account
+            </button>
+            
+            <a href="#" class="link-button">Forgot your password?</a>
+        </div>
+    </div>
+    
+    <!-- Sign Up Container -->
+    <div class="signup-container" id="signupContainer">
+        <!-- App Icon with Notebook & Clouds -->
+        <div class="app-icon">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="notebook-icon"></div>
+        </div>
+        
+        <!-- App Branding -->
+        <h1 class="app-title">Join NotiFYI</h1>
+        <p class="app-subtitle">Start organizing your life today</p>
+        
+        <!-- Signup Form -->
+        <form id="signupForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="firstName">First Name</label>
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        class="form-input" 
+                        placeholder="Your first name"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="lastName">Last Name</label>
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        class="form-input" 
+                        placeholder="Your last name"
+                        required
+                    >
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="signupEmail">Email Address</label>
+                <input 
+                    type="email" 
+                    id="signupEmail" 
+                    class="form-input" 
+                    placeholder="Enter your email address"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="signupPassword">Create Password</label>
+                <div class="password-toggle">
+                    <input 
+                        type="password" 
+                        id="signupPassword" 
+                        class="form-input" 
+                        placeholder="Create a strong password"
+                        required
+                        oninput="checkPasswordStrength()"
+                    >
+                    <button type="button" class="toggle-btn" onclick="toggleSignupPassword()">Show</button>
+                </div>
+                
+                <!-- Password Strength Meter -->
+                <div class="strength-meter">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-text" id="strengthText">Password strength will appear here</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    class="form-input" 
+                    placeholder="Confirm your password"
+                    required
+                >
+            </div>
+            
+            <!-- Terms and Privacy -->
+            <div class="checkbox-group">
+                <input type="checkbox" id="agreeTerms" class="checkbox-input" required>
+                <label for="agreeTerms" class="checkbox-label">
+                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+            </div>
+            
+            <!-- Embedded Help Tooltip -->
+            <div class="help-tooltip">
+                Pro tip: Use a mix of letters, numbers, and symbols for a stronger password!
+            </div>
+            
+            <button type="submit" class="login-button" id="signupBtn">
+                Create My Account
+            </button>
+        </form>
+        
+        <!-- Divider -->
+        <div class="divider">
+            <span>or</span>
+        </div>
+        
+        <!-- Back to Login -->
+        <div class="secondary-actions">
+            <button class="signup-button" onclick="showLoginForm()">
+                Back to Sign In
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Make functions globally available
+        window.togglePassword = function() {
+            const passwordField = document.getElementById('password');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleBtn.textContent = 'Hide';
+            } else {
+                passwordField.type = 'password';
+                toggleBtn.textContent = 'Show';
+            }
+        };
+        
+        // Password visibility toggle for signup
+        window.toggleSignupPassword = function() {
+            const passwordField = document.getElementById('signupPassword');
+            const toggleBtn = document.querySelectorAll('.toggle-btn')[1];
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleBtn.textContent = 'Hide';
+            } else {
+                passwordField.type = 'password';
+                toggleBtn.textContent = 'Show';
+            }
+        };
+        
+        // Show signup form
+        window.showSignupForm = function() {
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('signupContainer').classList.add('active');
+        };
+        
+        // Show login form
+        window.showLoginForm = function() {
+            document.getElementById('signupContainer').classList.remove('active');
+            document.getElementById('loginContainer').classList.remove('hidden');
+        };
+        
+        // Password strength checker
+        window.checkPasswordStrength = function() {
+            const password = document.getElementById('signupPassword').value;
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            let feedback = '';
+            
+            // Length check
+            if (password.length >= 8) strength += 1;
+            
+            // Character variety checks
+            if (/[a-z]/.test(password)) strength += 1;
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+            
+            // Set strength level
+            strengthFill.className = 'strength-fill';
+            if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+                feedback = 'Weak - Add more characters and variety';
+                strengthText.style.color = '#dc3545';
+            } else if (strength === 3) {
+                strengthFill.classList.add('strength-fair');
+                feedback = 'Fair - Try adding special characters';
+                strengthText.style.color = '#ffc107';
+            } else if (strength === 4) {
+                strengthFill.classList.add('strength-good');
+                feedback = 'Good - Consider making it longer';
+                strengthText.style.color = '#17a2b8';
+            } else if (strength === 5) {
+                strengthFill.classList.add('strength-strong');
+                feedback = 'Strong - Great password!';
+                strengthText.style.color = '#28a745';
+            }
+            
+            strengthText.textContent = feedback;
+        };
+        
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission with loading state (Login)
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const loginBtn = document.getElementById('loginBtn');
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Basic validation
+                if (!email || !password) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // Loading state
+                loginBtn.classList.add('loading');
+                loginBtn.textContent = 'Signing In...';
+                
+                // Simulate login process
+                setTimeout(() => {
+                    loginBtn.classList.remove('loading');
+                    loginBtn.textContent = 'Sign In to NotiFYI';
+                    
+                    alert('Login successful! Welcome back to NotiFYI!');
+                    // window.location.href = '/dashboard';
+                }, 2000);
+            });
+            
+            // Form submission for signup
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const signupBtn = document.getElementById('signupBtn');
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('signupEmail').value;
+                const password = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const agreeTerms = document.getElementById('agreeTerms').checked;
+                
+                // Validation
+                if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long');
+                    return;
+                }
+                
+                if (!agreeTerms) {
+                    alert('Please agree to the Terms of Service and Privacy Policy');
+                    return;
+                }
+                
+                // Loading state
+                signupBtn.classList.add('loading');
+                signupBtn.textContent = 'Creating Account...';
+                
+                // Simulate signup process
+                setTimeout(() => {
+                    signupBtn.classList.remove('loading');
+                    signupBtn.textContent = 'Create My Account';
+                    
+                    alert(`Welcome to NotiFYI, ${firstName}! Your account has been created successfully. Please check your email to verify your account.`);
+                    
+                    // Switch back to login
+                    showLoginForm();
+                    
+                    // Pre-fill login email
+                    document.getElementById('email').value = email;
+                }, 3000);
+            });
+            
+            // Input focus effects
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
