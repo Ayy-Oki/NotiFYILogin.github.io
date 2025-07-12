@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotiFYI - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0077be 0%, #00a8cc 25%, #0096c7 50%, #0077b6 75%, #023e8a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 25px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            border-radius: 18px;
+            margin: 0 auto 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3);
+        }
+        
+        .notebook-icon {
+            width: 30px;
+            height: 38px;
+            background: white;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .notebook-icon::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 6px;
+            right: 6px;
+            height: 2px;
+            background: #4A90E2;
+            border-radius: 1px;
+        }
+        
+        .notebook-icon::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: 6px;
+            right: 6px;
+            height: 1px;
+            background: #ccc;
+            border-radius: 0.5px;
+            box-shadow: 0 6px 0 #ccc, 0 12px 0 #ccc;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            opacity: 0.7;
+        }
+        
+        .cloud::before,
+        .cloud::after {
+            content: "";
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .cloud-1 {
+            width: 20px;
+            height: 10px;
+            top: 15px;
+            left: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .cloud-1::before {
+            width: 12px;
+            height: 12px;
+            top: -6px;
+            left: 2px;
+        }
+        
+        .cloud-1::after {
+            width: 8px;
+            height: 8px;
+            top: -4px;
+            right: 2px;
+        }
+        
+        .cloud-2 {
+            width: 16px;
+            height: 8px;
+            bottom: 20px;
+            right: 12px;
+            animation: float 4s ease-in-out infinite reverse;
+        }
+        
+        .cloud-2::before {
+            width: 10px;
+            height: 10px;
+            top: -5px;
+            left: 1px;
+        }
+        
+        .cloud-2::after {
+            width: 6px;
+            height: 6px;
+            top: -3px;
+            right: 1px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        .app-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+        
+        .app-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #4A90E2;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #adb5bd;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .help-tooltip {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .help-tooltip::before {
+            content: "💡";
+            font-size: 14px;
+        }
+        
+        .main-button {
+            width: 100%;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        
+        .main-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+        }
+        
+        .main-button:active {
+            transform: translateY(0);
+        }
+        
+        .main-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #adb5bd;
+            font-size: 13px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e1e5e9;
+        }
+        
+        .divider span {
+            padding: 0 15px;
+        }
+        
+        .secondary-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .secondary-button {
+            background: transparent;
+            border: 2px solid #4A90E2;
+            color: #4A90E2;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-button:hover {
+            background: #4A90E2;
+            color: white;
+        }
+        
+        .link-button {
+            color: #4A90E2;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .link-button:hover {
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        /* Signup specific styles */
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 12px;
+        }
+        
+        .strength-meter {
+            margin-top: 8px;
+            height: 4px;
+            background: #e1e5e9;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .strength-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .strength-weak { width: 25%; background: #dc3545; }
+        .strength-fair { width: 50%; background: #ffc107; }
+        .strength-good { width: 75%; background: #17a2b8; }
+        .strength-strong { width: 100%; background: #28a745; }
+        
+        .strength-text {
+            font-size: 12px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .checkbox-input {
+            margin-top: 2px;
+        }
+        
+        .checkbox-label {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #555;
+        }
+        
+        .checkbox-label a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+        
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Forgot password specific styles */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            border: 2px solid #e1e5e9;
+            background: white;
+            color: #666;
+        }
+        
+        .step.active {
+            background: #4A90E2;
+            border-color: #4A90E2;
+            color: white;
+        }
+        
+        .step.completed {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        
+        .step-line {
+            width: 40px;
+            height: 2px;
+            background: #e1e5e9;
+        }
+        
+        .step-line.completed {
+            background: #28a745;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        .success-icon {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .resend-section {
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .resend-button {
+            color: #4A90E2;
+            background: none;
+            border: none;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .resend-button:disabled {
+            color: #999;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+        
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .loading::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #fff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+                margin: 5px;
+                max-width: 340px;
+            }
+            
+            .app-title {
+                font-size: 24px;
+            }
+            
+            .form-input,
+            .main-button {
+                padding: 12px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .step-indicator {
+                gap: 8px;
+            }
+            
+            .step {
+                width: 25px;
+                height: 25px;
+                font-size: 11px;
+            }
+            
+            .step-line {
+                width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- LOGIN SCREEN -->
+        <div id="loginScreen">
+            <div class="app-icon">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="notebook-icon"></div>
+            </div>
+            
+            <h1 class="app-title">NotiFYI</h1>
+            <p class="app-subtitle">Your Smart Planning Companion</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        class="form-input" 
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Password</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            class="form-input" 
+                            placeholder="Enter your password"
+                            required
+                        >
+                        <button type="button" class="toggle-btn" onclick="togglePassword('loginPassword')">Show</button>
+                    </div>
+                </div>
+                
+                <div class="help-tooltip">
+                    First time here? Your account automatically syncs across all your devices once you sign up!
+                </div>
+                
+                <button type="submit" class="main-button" id="loginBtn">
+                    Sign In to NotiFYI
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="secondary-actions">
+                <button class="secondary-button" onclick="showSignup()">
+                    Create New Account
+                </button>
+                
+                <a href="#" class="link-button" onclick="showForgotPassword()">Forgot your password?</a>
+            </div>
+        </div>
+        
+        <!-- SIGNUP SCREEN -->
+        <div id="signupScreen" class="hidden">
+            <div class="app-icon">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="notebook-icon"></div>
+            </div>
+            
+            <h1 class="app-title">Join NotiFYI</h1>
+            <p class="app-subtitle">Start organizing your life today</p>
+            
+            <form id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <input 
+                            type="text" 
+                            id="firstName" 
+                            class="form-input" 
+                            placeholder="Your first name"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Last Name</label>
+                        <input 
+                            type="text" 
+                            id="lastName" 
+                            class="form-input" 
+                            placeholder="Your last name"
+                            required
+                        >
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="signupEmail">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="signupEmail" 
+                        class="form-input" 
+                        placeholder="Enter your email address"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="signupPassword">Create Password</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="signupPassword" 
+                            class="form-input" 
+                            placeholder="Create a strong password"
+                            required
+                            oninput="checkPasswordStrength()"
+                        >
+                        <button type="button" class="toggle-btn" onclick="togglePassword('signupPassword')">Show</button>
+                    </div>
+                    
+                    <div class="strength-meter">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Password strength will appear here</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        class="form-input" 
+                        placeholder="Confirm your password"
+                        required
+                    >
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreeTerms" class="checkbox-input" required>
+                    <label for="agreeTerms" class="checkbox-label">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <div class="help-tooltip">
+                    Pro tip: Use a mix of letters, numbers, and symbols for a stronger password!
+                </div>
+                
+                <button type="submit" class="main-button" id="signupBtn">
+                    Create My Account
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="secondary-actions">
+                <button class="secondary-button" onclick="showLogin()">
+                    Back to Sign In
+                </button>
+            </div>
+        </div>
+        
+        <!-- FORGOT PASSWORD SCREEN -->
+        <div id="forgotPasswordScreen" class="hidden">
+            <div class="app-icon">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="notebook-icon"></div>
+            </div>
+            
+            <!-- Step 1: Enter Email -->
+            <div id="forgotStep1">
+                <h1 class="app-title">Forgot Password?</h1>
+                <p class="app-subtitle">No worries! Enter your email and we'll send you a reset link.</p>
+                
+                <div class="step-indicator">
+                    <div class="step active">1</div>
+                    <div class="step-line"></div>
+                    <div class="step">2</div>
+                    <div class="step-line"></div>
+                    <div class="step">3</div>
+                </div>
+                
+                <form id="forgotForm">
+                    <div class="form-group">
+                        <label class="form-label" for="resetEmail">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="resetEmail" 
+                            class="form-input" 
+                            placeholder="Enter your email address"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="help-tooltip">
+                        We'll send a secure reset link to this email address.
+                    </div>
+                    
+                    <button type="submit" class="main-button" id="sendResetBtn">
+                        Send Reset Link
+                    </button>
+                </form>
+                
+                <a href="#" class="link-button" onclick="showLogin()">← Back to Sign In</a>
+            </div>
+            
+            <!-- Step 2: Check Email -->
+            <div id="forgotStep2" class="hidden">
+                <h1 class="app-title">Check Your Email</h1>
+                <p class="app-subtitle">We've sent a password reset link to your email address.</p>
+                
+                <div class="step-indicator">
+                    <div class="step completed">✓</div>
+                    <div class="step-line completed"></div>
+                    <div class="step active">2</div>
+                    <div class="step-line"></div>
+                    <div class="step">3</div>
+                </div>
+                
+                <div class="success-message">
+                    <span class="success-icon">📧</span>
+                    <strong>Email sent successfully!</strong><br>
+                    Check your inbox and click the reset link to continue. The link will expire in 15 minutes.
+                </div>
+                
+                <div class="resend-section">
+                    Didn't receive the email? 
+                    <button class="resend-button" id="resendBtn" onclick="resendEmail()">
+                        Resend link
+                    </button>
+                    <div id="resendTimer"></div>
+                </div>
+                
+                <a href="#" class="link-button" onclick="showLogin()">← Back to Sign In</a>
+            </div>
+            
+            <!-- Step 3: Success -->
+            <div id="forgotStep3" class="hidden">
+                <h1 class="app-title">Password Reset!</h1>
+                <p class="app-subtitle">Your password has been successfully updated.</p>
+                
+                <div class="step-indicator">
+                    <div class="step completed">✓</div>
+                    <div class="step-line completed"></div>
+                    <div class="step completed">✓</div>
+                    <div class="step-line completed"></div>
+                    <div class="step active">✓</div>
+                </div>
+                
+                <div class="success-message">
+                    <span class="success-icon">🎉</span>
+                    <strong>All done!</strong><br>
+                    You can now sign in with your new password.
+                </div>
+                
+                <button class="main-button" onclick="showLogin()">
+                    Continue to Sign In
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let resendTimer = 60;
+        let timerInterval = null;
+        
+        // Navigation functions
+        function showLogin() {
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('signupScreen').classList.add('hidden');
+            document.getElementById('forgotPasswordScreen').classList.add('hidden');
+            
+            // Reset forgot password to step 1
+            document.getElementById('forgotStep1').classList.remove('hidden');
+            document.getElementById('forgotStep2').classList.add('hidden');
+            document.getElementById('forgotStep3').classList.add('hidden');
+        }
+        
+        function showSignup() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('signupScreen').classList.remove('hidden');
+            document.getElementById('forgotPasswordScreen').classList.add('hidden');
+        }
+        
+        function showForgotPassword() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('signupScreen').classList.add('hidden');
+            document.getElementById('forgotPasswordScreen').classList.remove('hidden');
+            
+            // Reset to step 1
+            document.getElementById('forgotStep1').classList.remove('hidden');
+            document.getElementById('forgotStep2').classList.add('hidden');
+            document.getElementById('forgotStep3').classList.add('hidden');
+        }
+        
+        function showForgotStep(step) {
+            document.getElementById('forgotStep1').classList.add('hidden');
+            document.getElementById('forgotStep2').classList.add('hidden');
+            document.getElementById('forgotStep3').classList.add('hidden');
+            document.getElementById('forgotStep' + step).classList.remove('hidden');
+        }
+        
+        // Password toggle function
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const toggleBtn = passwordField.nextElementSibling;
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleBtn.textContent = 'Hide';
+            } else {
+                passwordField.type = 'password';
+                toggleBtn.textContent = 'Show';
+            }
+        }
+        
+        // Password strength checker
+        function checkPasswordStrength() {
+            const password = document.getElementById('signupPassword').value;
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            let feedback = '';
+            
+            if (password.length >= 8) strength += 1;
+            if (/[a-z]/.test(password)) strength += 1;
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+            
+            strengthFill.className = 'strength-fill';
+            if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+                feedback = 'Weak - Add more characters and variety';
+                strengthText.style.color = '#dc3545';
+            } else if (strength === 3) {
+                strengthFill.classList.add('strength-fair');
+                feedback = 'Fair - Try adding special characters';
+                strengthText.style.color = '#ffc107';
+            } else if (strength === 4) {
+                strengthFill.classList.add('strength-good');
+                feedback = 'Good - Consider making it longer';
+                strengthText.style.color = '#17a2b8';
+            } else if (strength === 5) {
+                strengthFill.classList.add('strength-strong');
+                feedback = 'Strong - Great password!';
+                strengthText.style.color = '#28a745';
+            }
+            
+            strengthText.textContent = feedback;
+        }
+        
+        // Resend email function
+        function resendEmail() {
+            const resendBtn = document.getElementById('resendBtn');
+            
+            if (resendBtn.disabled) return;
+            
+            resendBtn.textContent = 'Sending...';
+            resendBtn.disabled = true;
+            
+            setTimeout(() => {
+                resendBtn.textContent = 'Resent!';
+                startResendTimer();
+            }, 1000);
+        }
+        
+        // Start resend timer
+        function startResendTimer() {
+            const resendBtn = document.getElementById('resendBtn');
+            const timerDiv = document.getElementById('resendTimer');
+            
+            resendTimer = 60;
+            resendBtn.disabled = true;
+            
+            timerInterval = setInterval(() => {
+                resendTimer--;
+                timerDiv.textContent = `You can resend in ${resendTimer} seconds`;
+                
+                if (resendTimer <= 0) {
+                    clearInterval(timerInterval);
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = 'Resend link';
+                    timerDiv.textContent = '';
+                }
+            }, 1000);
+        }
+        
+        // Form submissions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const loginBtn = document.getElementById('loginBtn');
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!email || !password) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                loginBtn.classList.add('loading');
+                loginBtn.textContent = 'Signing In...';
+                
+                setTimeout(() => {
+                    loginBtn.classList.remove('loading');
+                    loginBtn.textContent = 'Sign In to NotiFYI';
+                    alert('Login successful! Welcome back to NotiFYI!');
+                }, 2000);
+            });
+            
+            // Signup form
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const signupBtn = document.getElementById('signupBtn');
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('signupEmail').value;
+                const password = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const agreeTerms = document.getElementById('agreeTerms').checked;
+                
+                // Validation
+                if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long');
+                    return;
+                }
+                
+                if (!agreeTerms) {
+                    alert('Please agree to the Terms of Service and Privacy Policy');
+                    return;
+                }
+                
+                signupBtn.classList.add('loading');
+                signupBtn.textContent = 'Creating Account...';
+                
+                setTimeout(() => {
+                    signupBtn.classList.remove('loading');
+                    signupBtn.textContent = 'Create My Account';
+                    
+                    alert(`Welcome to NotiFYI, ${firstName}! Your account has been created successfully.`);
+                    
+                    // Switch back to login and pre-fill email
+                    showLogin();
+                    document.getElementById('loginEmail').value = email;
+                }, 3000);
+            });
+            
+            // Forgot password form
+            document.getElementById('forgotForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('resetEmail').value;
+                const submitBtn = document.getElementById('sendResetBtn');
+                
+                if (!email) {
+                    alert('Please enter your email address');
+                    return;
+                }
+                
+                submitBtn.classList.add('loading');
+                submitBtn.textContent = 'Sending...';
+                
+                setTimeout(() => {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.textContent = 'Send Reset Link';
+                    
+                    // Show step 2
+                    showForgotStep(2);
+                    startResendTimer();
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
