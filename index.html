@@ -139,8 +139,12 @@
         }
         
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
+            0%, 100% { 
+                transform: translateY(0px); 
+            }
+            50% { 
+                transform: translateY(-3px); 
+            }
         }
         
         .app-title {
@@ -192,40 +196,6 @@
             color: #adb5bd;
         }
         
-        .password-toggle {
-            position: relative;
-        }
-        
-        .toggle-btn {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        
-        .help-tooltip {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 8px;
-            margin-top: 6px;
-            font-size: 12px;
-            color: #856404;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .help-tooltip::before {
-            content: "💡";
-            font-size: 14px;
-        }
-        
         .main-button {
             width: 100%;
             background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
@@ -246,14 +216,102 @@
             box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
         }
         
-        .main-button:active {
-            transform: translateY(0);
+        .link-button {
+            color: #4A90E2;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
         
-        .main-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+        .link-button:hover {
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        .help-tooltip {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .help-tooltip::before {
+            content: "💡";
+            font-size: 14px;
+        }
+        
+        .prototype-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .prototype-button {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px;
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: inherit;
+        }
+        
+        .prototype-button:hover {
+            border-color: #4A90E2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.2);
+        }
+        
+        .prototype-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .prototype-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .prototype-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 12px;
         }
         
         .divider {
@@ -276,12 +334,6 @@
             padding: 0 15px;
         }
         
-        .secondary-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
         .secondary-button {
             background: transparent;
             border: 2px solid #4A90E2;
@@ -299,21 +351,6 @@
             color: white;
         }
         
-        .link-button {
-            color: #4A90E2;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 8px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-        
-        .link-button:hover {
-            background: rgba(74, 144, 226, 0.1);
-        }
-        
-        /* Signup specific styles */
         .form-row {
             display: flex;
             gap: 10px;
@@ -321,7 +358,6 @@
         
         .form-row .form-group {
             flex: 1;
-            margin-bottom: 12px;
         }
         
         .strength-meter {
@@ -376,23 +412,22 @@
             text-decoration: underline;
         }
         
-        /* Forgot password specific styles */
         .step-indicator {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
-            gap: 10px;
+            margin-bottom: 15px;
+            gap: 8px;
         }
         
         .step {
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             border: 2px solid #e1e5e9;
             background: white;
@@ -412,7 +447,7 @@
         }
         
         .step-line {
-            width: 40px;
+            width: 30px;
             height: 2px;
             background: #e1e5e9;
         }
@@ -425,16 +460,16 @@
             background: #d4edda;
             border: 1px solid #c3e6cb;
             color: #155724;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 13px;
-            line-height: 1.4;
+            margin-bottom: 12px;
+            font-size: 12px;
+            line-height: 1.3;
         }
         
         .success-icon {
-            font-size: 16px;
-            margin-bottom: 8px;
+            font-size: 14px;
+            margin-bottom: 5px;
             display: block;
         }
         
@@ -442,9 +477,10 @@
             background: #f8f9fa;
             border: 1px solid #e1e5e9;
             border-radius: 8px;
-            padding: 12px;
-            margin-top: 15px;
-            font-size: 12px;
+            padding: 10px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            font-size: 11px;
             color: #666;
             text-align: center;
         }
@@ -462,67 +498,6 @@
             color: #999;
             cursor: not-allowed;
             text-decoration: none;
-        }
-        
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-            position: relative;
-        }
-        
-        .loading::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid #fff;
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px 15px;
-                margin: 5px;
-                max-width: 340px;
-            }
-            
-            .app-title {
-                font-size: 24px;
-            }
-            
-            .form-input,
-            .main-button {
-                padding: 12px;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            .step-indicator {
-                gap: 8px;
-            }
-            
-            .step {
-                width: 25px;
-                height: 25px;
-                font-size: 11px;
-            }
-            
-            .step-line {
-                width: 30px;
-            }
         }
     </style>
 </head>
@@ -553,20 +528,17 @@
                 
                 <div class="form-group">
                     <label class="form-label" for="loginPassword">Password</label>
-                    <div class="password-toggle">
-                        <input 
-                            type="password" 
-                            id="loginPassword" 
-                            class="form-input" 
-                            placeholder="Enter your password"
-                            required
-                        >
-                        <button type="button" class="toggle-btn" onclick="togglePassword('loginPassword')">Show</button>
-                    </div>
+                    <input 
+                        type="password" 
+                        id="loginPassword" 
+                        class="form-input" 
+                        placeholder="Enter your password"
+                        required
+                    >
                 </div>
                 
                 <div class="help-tooltip">
-                    First time here? Your account automatically syncs across all your devices once you sign up!
+                    First time here? Your account automatically syncs across all your devices!
                 </div>
                 
                 <button type="submit" class="main-button" id="loginBtn">
@@ -578,13 +550,13 @@
                 <span>or</span>
             </div>
             
-            <div class="secondary-actions">
-                <button class="secondary-button" onclick="showSignup()">
-                    Create New Account
-                </button>
-                
-                <a href="#" class="link-button" onclick="showForgotPassword()">Forgot your password?</a>
-            </div>
+            <button class="secondary-button" onclick="showSignup()">
+                Create New Account
+            </button>
+            
+            <a href="#" class="link-button" onclick="showForgotPassword()">Forgot your password?</a>
+            <br>
+            <a href="#" class="link-button" onclick="showWelcome()">Skip to Demo →</a>
         </div>
         
         <!-- SIGNUP SCREEN -->
@@ -685,11 +657,9 @@
                 <span>or</span>
             </div>
             
-            <div class="secondary-actions">
-                <button class="secondary-button" onclick="showLogin()">
-                    Back to Sign In
-                </button>
-            </div>
+            <button class="secondary-button" onclick="showLogin()">
+                Back to Sign In
+            </button>
         </div>
         
         <!-- FORGOT PASSWORD SCREEN -->
@@ -703,7 +673,7 @@
             <!-- Step 1: Enter Email -->
             <div id="forgotStep1">
                 <h1 class="app-title">Forgot Password?</h1>
-                <p class="app-subtitle">No worries! Enter your email and we'll send you a reset link.</p>
+                <p class="app-subtitle">Enter your email for a reset link.</p>
                 
                 <div class="step-indicator">
                     <div class="step active">1</div>
@@ -740,7 +710,7 @@
             <!-- Step 2: Check Email -->
             <div id="forgotStep2" class="hidden">
                 <h1 class="app-title">Check Your Email</h1>
-                <p class="app-subtitle">We've sent a password reset link to your email address.</p>
+                <p class="app-subtitle">We've sent a reset link to your email.</p>
                 
                 <div class="step-indicator">
                     <div class="step completed">✓</div>
@@ -752,12 +722,11 @@
                 
                 <div class="success-message">
                     <span class="success-icon">📧</span>
-                    <strong>Email sent successfully!</strong><br>
-                    Check your inbox and click the reset link to continue. The link will expire in 15 minutes.
+                    <strong>Email sent!</strong> Check your inbox and click the reset link. Link expires in 15 minutes.
                 </div>
                 
                 <div class="resend-section">
-                    Didn't receive the email? 
+                    Didn't receive it? 
                     <button class="resend-button" id="resendBtn" onclick="resendEmail()">
                         Resend link
                     </button>
@@ -770,7 +739,7 @@
             <!-- Step 3: Success -->
             <div id="forgotStep3" class="hidden">
                 <h1 class="app-title">Password Reset!</h1>
-                <p class="app-subtitle">Your password has been successfully updated.</p>
+                <p class="app-subtitle">Your password has been updated.</p>
                 
                 <div class="step-indicator">
                     <div class="step completed">✓</div>
@@ -782,8 +751,7 @@
                 
                 <div class="success-message">
                     <span class="success-icon">🎉</span>
-                    <strong>All done!</strong><br>
-                    You can now sign in with your new password.
+                    <strong>All done!</strong> You can now sign in with your new password.
                 </div>
                 
                 <button class="main-button" onclick="showLogin()">
@@ -791,17 +759,61 @@
                 </button>
             </div>
         </div>
+        
+        <!-- WELCOME/NAVIGATION SCREEN -->
+        <div id="welcomeScreen" class="hidden">
+            <div class="app-icon">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="notebook-icon"></div>
+            </div>
+            
+            <h1 class="app-title">Welcome to NotiFYI!</h1>
+            <p class="app-subtitle">Your smart planning companion is ready. Choose where you'd like to start:</p>
+            
+            <div class="prototype-links">
+                <a href="https://www.figma.com/proto/pwbM01xMonrziMsqS64WDk/NotiFYI-Home?node-id=1-1588&p=f&t=xJZYKaKWM82fHds9-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1588&show-proto-sidebar=1" 
+                   target="_blank" class="prototype-button">
+                    <div class="prototype-icon">🏠</div>
+                    <div class="prototype-text">
+                        <div class="prototype-title">Home Dashboard</div>
+                        <div class="prototype-desc">Main workspace with quick actions</div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/proto/vAxTqvCCD2Y3SL0x1Ddgjy/Untitled?node-id=1-3&p=f&t=vv8U42ZwefGyEZZD-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&show-proto-sidebar=1" 
+                   target="_blank" class="prototype-button">
+                    <div class="prototype-icon">⏰</div>
+                    <div class="prototype-text">
+                        <div class="prototype-title">Reminders & Activities</div>
+                        <div class="prototype-desc">Manage alerts, notifications, and timed sessions</div>
+                    </div>
+                </a>
+                
+                <a href="https://www.figma.com/proto/0CEfpFQT956D7Wl10As3Ke/Settings-Page-UI-Design?node-id=0-1&t=FNKs4RQE9pnDzWOE-1" 
+                   target="_blank" class="prototype-button">
+                    <div class="prototype-icon">⚙️</div>
+                    <div class="prototype-text">
+                        <div class="prototype-title">Settings</div>
+                        <div class="prototype-desc">Customize your NotiFYI experience</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="help-tooltip" style="margin-top: 20px;">
+                Click any option above to explore our interactive prototypes. Each link opens in a new tab.
+            </div>
+            
+            <a href="#" class="link-button" onclick="showLogin()">← Back to Login</a>
+        </div>
     </div>
 
     <script>
-        let resendTimer = 60;
-        let timerInterval = null;
-        
-        // Navigation functions
         function showLogin() {
             document.getElementById('loginScreen').classList.remove('hidden');
             document.getElementById('signupScreen').classList.add('hidden');
             document.getElementById('forgotPasswordScreen').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.add('hidden');
             
             // Reset forgot password to step 1
             document.getElementById('forgotStep1').classList.remove('hidden');
@@ -813,17 +825,26 @@
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('signupScreen').classList.remove('hidden');
             document.getElementById('forgotPasswordScreen').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.add('hidden');
         }
         
         function showForgotPassword() {
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('signupScreen').classList.add('hidden');
             document.getElementById('forgotPasswordScreen').classList.remove('hidden');
+            document.getElementById('welcomeScreen').classList.add('hidden');
             
             // Reset to step 1
             document.getElementById('forgotStep1').classList.remove('hidden');
             document.getElementById('forgotStep2').classList.add('hidden');
             document.getElementById('forgotStep3').classList.add('hidden');
+        }
+        
+        function showWelcome() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('signupScreen').classList.add('hidden');
+            document.getElementById('forgotPasswordScreen').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.remove('hidden');
         }
         
         function showForgotStep(step) {
@@ -833,7 +854,6 @@
             document.getElementById('forgotStep' + step).classList.remove('hidden');
         }
         
-        // Password toggle function
         function togglePassword(fieldId) {
             const passwordField = document.getElementById(fieldId);
             const toggleBtn = passwordField.nextElementSibling;
@@ -847,7 +867,6 @@
             }
         }
         
-        // Password strength checker
         function checkPasswordStrength() {
             const password = document.getElementById('signupPassword').value;
             const strengthFill = document.getElementById('strengthFill');
@@ -884,7 +903,9 @@
             strengthText.textContent = feedback;
         }
         
-        // Resend email function
+        let resendTimer = 60;
+        let timerInterval = null;
+        
         function resendEmail() {
             const resendBtn = document.getElementById('resendBtn');
             
@@ -899,7 +920,6 @@
             }, 1000);
         }
         
-        // Start resend timer
         function startResendTimer() {
             const resendBtn = document.getElementById('resendBtn');
             const timerDiv = document.getElementById('resendTimer');
@@ -920,103 +940,98 @@
             }, 1000);
         }
         
-        // Form submissions
+        // Handle all forms
         document.addEventListener('DOMContentLoaded', function() {
             // Login form
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const loginBtn = document.getElementById('loginBtn');
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-                
-                if (!email || !password) {
-                    alert('Please fill in all fields');
-                    return;
-                }
-                
-                loginBtn.classList.add('loading');
-                loginBtn.textContent = 'Signing In...';
-                
-                setTimeout(() => {
-                    loginBtn.classList.remove('loading');
-                    loginBtn.textContent = 'Sign In to NotiFYI';
-                    alert('Login successful! Welcome back to NotiFYI!');
-                }, 2000);
-            });
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const loginBtn = document.getElementById('loginBtn');
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    
+                    if (!email || !password) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+                    
+                    loginBtn.textContent = 'Signing In...';
+                    
+                    setTimeout(() => {
+                        loginBtn.textContent = 'Sign In to NotiFYI';
+                        showWelcome();
+                    }, 1000);
+                });
+            }
             
             // Signup form
-            document.getElementById('signupForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const signupBtn = document.getElementById('signupBtn');
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const email = document.getElementById('signupEmail').value;
-                const password = document.getElementById('signupPassword').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                const agreeTerms = document.getElementById('agreeTerms').checked;
-                
-                // Validation
-                if (!firstName || !lastName || !email || !password || !confirmPassword) {
-                    alert('Please fill in all required fields');
-                    return;
-                }
-                
-                if (password !== confirmPassword) {
-                    alert('Passwords do not match');
-                    return;
-                }
-                
-                if (password.length < 8) {
-                    alert('Password must be at least 8 characters long');
-                    return;
-                }
-                
-                if (!agreeTerms) {
-                    alert('Please agree to the Terms of Service and Privacy Policy');
-                    return;
-                }
-                
-                signupBtn.classList.add('loading');
-                signupBtn.textContent = 'Creating Account...';
-                
-                setTimeout(() => {
-                    signupBtn.classList.remove('loading');
-                    signupBtn.textContent = 'Create My Account';
+            const signupForm = document.getElementById('signupForm');
+            if (signupForm) {
+                signupForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
                     
-                    alert(`Welcome to NotiFYI, ${firstName}! Your account has been created successfully.`);
+                    const signupBtn = document.getElementById('signupBtn');
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const email = document.getElementById('signupEmail').value;
+                    const password = document.getElementById('signupPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    const agreeTerms = document.getElementById('agreeTerms').checked;
                     
-                    // Switch back to login and pre-fill email
-                    showLogin();
-                    document.getElementById('loginEmail').value = email;
-                }, 3000);
-            });
+                    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        alert('Passwords do not match');
+                        return;
+                    }
+                    
+                    if (password.length < 8) {
+                        alert('Password must be at least 8 characters long');
+                        return;
+                    }
+                    
+                    if (!agreeTerms) {
+                        alert('Please agree to the Terms of Service and Privacy Policy');
+                        return;
+                    }
+                    
+                    signupBtn.textContent = 'Creating Account...';
+                    
+                    setTimeout(() => {
+                        signupBtn.textContent = 'Create My Account';
+                        showWelcome();
+                    }, 2000);
+                });
+            }
             
             // Forgot password form
-            document.getElementById('forgotForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('resetEmail').value;
-                const submitBtn = document.getElementById('sendResetBtn');
-                
-                if (!email) {
-                    alert('Please enter your email address');
-                    return;
-                }
-                
-                submitBtn.classList.add('loading');
-                submitBtn.textContent = 'Sending...';
-                
-                setTimeout(() => {
-                    submitBtn.classList.remove('loading');
-                    submitBtn.textContent = 'Send Reset Link';
+            const forgotForm = document.getElementById('forgotForm');
+            if (forgotForm) {
+                forgotForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
                     
-                    // Show step 2
-                    showForgotStep(2);
-                    startResendTimer();
-                }, 2000);
-            });
+                    const email = document.getElementById('resetEmail').value;
+                    const submitBtn = document.getElementById('sendResetBtn');
+                    
+                    if (!email) {
+                        alert('Please enter your email address');
+                        return;
+                    }
+                    
+                    submitBtn.textContent = 'Sending...';
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = 'Send Reset Link';
+                        showForgotStep(2);
+                        startResendTimer();
+                    }, 1000);
+                });
+            }
         });
     </script>
 </body>
